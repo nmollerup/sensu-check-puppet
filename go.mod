@@ -3,7 +3,7 @@ module github.com/nmollerup/sensu-check-puppet
 go 1.21
 
 require (
-	github.com/sensu/sensu-go/api/core/v2 v2.14.0
+	github.com/sensu/sensu-go/api/core/v2 v2.16.0
 	github.com/sensu/sensu-plugin-sdk v0.16.0
 	gopkg.in/yaml.v2 v2.4.0
 )
