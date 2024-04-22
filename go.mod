@@ -25,9 +25,7 @@ require (
 	github.com/pelletier/go-toml v1.2.0 // indirect
 	github.com/robertkrimen/otto v0.0.0-20221006114523-201ab5b34f52 // indirect
 	github.com/robfig/cron/v3 v3.0.1 // indirect
-	github.com/sensu/core/v2 v2.16.1 // indirect
-	github.com/sensu/sensu-api-tools v0.1.0 // indirect
-	github.com/sensu/sensu-go/types v0.12.0 // indirect
+	github.com/sensu/sensu-go/types v0.10.0 // indirect
 	github.com/sensu/sensu-licensing v0.1.2 // indirect
 	github.com/sirupsen/logrus v1.9.0 // indirect
 	github.com/spf13/afero v1.1.2 // indirect
@@ -36,6 +34,7 @@ require (
 	github.com/spf13/jwalterweatherman v1.0.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.7.0 // indirect
+	github.com/stretchr/testify v1.8.0 // indirect
 	github.com/subosito/gotenv v1.2.0 // indirect
 	go.etcd.io/etcd/api/v3 v3.5.5 // indirect
 	golang.org/x/net v0.7.0 // indirect
