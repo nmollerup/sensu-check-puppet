@@ -3,8 +3,8 @@ module github.com/nmollerup/sensu-check-puppet
 go 1.21
 
 require (
-	github.com/sensu/sensu-go/api/core/v2 v2.16.0
-	github.com/sensu/sensu-plugin-sdk v0.19.0
+	github.com/sensu/sensu-go/api/core/v2 v2.14.0
+	github.com/sensu/sensu-plugin-sdk v0.16.0
 	gopkg.in/yaml.v2 v2.4.0
 )
 
@@ -27,7 +27,8 @@ require (
 	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/sensu/core/v2 v2.16.1 // indirect
 	github.com/sensu/sensu-api-tools v0.1.0 // indirect
-	github.com/sensu/sensu-licensing/v2 v2.2.1 // indirect
+	github.com/sensu/sensu-go/types v0.12.0 // indirect
+	github.com/sensu/sensu-licensing v0.1.2 // indirect
 	github.com/sirupsen/logrus v1.9.0 // indirect
 	github.com/spf13/afero v1.1.2 // indirect
 	github.com/spf13/cast v1.3.0 // indirect
