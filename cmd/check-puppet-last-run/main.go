@@ -28,7 +28,7 @@ type Config struct {
 var (
 	plugin = Config{
 		PluginConfig: sensu.PluginConfig{
-			Name:     "check-puppet-errors",
+			Name:     "check-puppet-last-run",
 			Short:    "",
 			Keyspace: "",
 		},
@@ -101,9 +101,9 @@ var (
 			Path:      "",
 			Argument:  "ignore-failures",
 			Shorthand: "i",
-			Default:   true,
+			Default:   false,
 			Value:     &plugin.IgnoreFailures,
-			Usage:     "Ignore Puppet failures",
+			Usage:     "Ignore Puppet failures, use together with warning, critical about time since last puppet run",
 		},
 	}
 )
@@ -137,6 +137,12 @@ func executeCheck(event *corev2.Event) (int, error) {
 		Resources map[string]int `yaml:"resources"`
 	}
 
+	var message string
+	var critical_message string
+	var warning_message string
+	var error_code int
+	var critical_code int
+
 	data, err := os.ReadFile(plugin.SummaryFile)
 	if err != nil {
 		fmt.Printf("Could not process %s: %v", plugin.SummaryFile, err)
@@ -154,35 +160,54 @@ func executeCheck(event *corev2.Event) (int, error) {
 	if summary.Time != nil {
 		if last_run, ok := summary.Time["last_run"]; ok {
 			if now-last_run > plugin.CriticalAge {
-				fmt.Printf("Puppet last run %s ago\n", formatted_duration(now-last_run))
-				return sensu.CheckStateCritical, nil
+				critical_message = fmt.Sprintf("Critical: Puppet was last run %s ago\n", formatted_duration(now-last_run))
+				critical_code = 2
+			}
+			if now-last_run > plugin.WarningAge {
+				warning_message = warning_message + fmt.Sprintf("Warning: Puppet was last run %s ago\n", formatted_duration(now-last_run))
+				error_code = 1
+			} else {
+				message = message + fmt.Sprintf("Puppet was last run %s ago\n", formatted_duration(now-last_run))
+				error_code = 0
 			}
 		}
 	}
 
 	// Check if the summary contains event information and if there are any failures.
-	if summary.Events != nil {
-		if failures, ok := summary.Events["failure"]; ok {
-			fmt.Printf("Failures: %d\n", failures)
-			if failures > 0 {
-				return sensu.CheckStateCritical, nil
+	if !plugin.IgnoreFailures {
+		if summary.Events != nil {
+			if failures, ok := summary.Events["failure"]; ok {
+				if failures > 0 {
+					critical_message = critical_message + fmt.Sprintf("Last puppet run had failures: %d\n", failures)
+					critical_code = 2
+				}
+			} else {
+				warning_message = warning_message + fmt.Sprintf("%s is missing information about the events", plugin.SummaryFile)
+				critical_code = 2
 			}
 		} else {
 			fmt.Printf("%s is missing information about the events", plugin.SummaryFile)
 			return sensu.CheckStateCritical, nil
 		}
-	} else {
-		fmt.Printf("%s is missing information about the events", plugin.SummaryFile)
-		return sensu.CheckStateCritical, nil
 	}
 
-	if !plugin.IgnoreFailures {
-		failures := summary.Events["failure"]
-		if failures > 0 {
-			fmt.Printf("Puppet last run with %d failures", failures)
-			return sensu.CheckStateCritical, nil
-		}
+	if critical_code == 2 {
+		error_code = 2
 	}
-	return sensu.CheckStateOK, nil
+
+	switch error_code {
+	case 0:
+		fmt.Print(message)
+		fmt.Printf("Puppet last run was without any failures")
+		return sensu.CheckStateOK, nil
+	case 1:
+		fmt.Print(warning_message)
+		return sensu.CheckStateWarning, nil
+	case 2:
+		fmt.Print(critical_message)
+		return sensu.CheckStateCritical, nil
+	default:
+		return sensu.CheckStateUnknown, nil
+	}
 
 }
