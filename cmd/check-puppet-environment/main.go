@@ -55,7 +55,9 @@ func executeCheck(event *corev2.Event) (int, error) {
 		fmt.Printf("Could not open %s: %v\n", plugin.ConfigFile, err)
 		return sensu.CheckStateCritical, nil
 	}
-	defer file.Close()
+	defer func() {
+		_ = file.Close()
+	}()
 
 	// Match "environment" key in INI format (with optional whitespace)
 	envRegex := regexp.MustCompile(`^\s*environment\s*=`)
