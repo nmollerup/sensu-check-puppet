@@ -34,6 +34,22 @@ Flags:
 Use "check-puppet-last-run [command] --help" for more information about a command.
 ```
 
+```
+  check-puppet-environment [flags]
+  check-puppet-environment [command]
+
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  help        Help about any command
+  version     Print the version number of this plugin
+
+Flags:
+  -c, --config-file string   Path to puppet.conf file (default "/etc/puppetlabs/puppet/puppet.conf")
+  -h, --help                 help for check-puppet-environment
+
+Use "check-puppet-environment [command] --help" for more information about a command.
+```
+
 ## Configuration
 
 ### Asset registration
