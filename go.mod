@@ -1,6 +1,6 @@
 module github.com/nmollerup/sensu-check-puppet
 
-go 1.24.2
+go 1.24.12
 
 require (
 	github.com/sensu/sensu-go/api/core/v2 v2.14.0
