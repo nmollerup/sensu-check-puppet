@@ -42,8 +42,14 @@ func main() {
 }
 
 func checkArgs(event *corev2.Event) (int, error) {
-	if _, err := os.Stat(plugin.ConfigFile); os.IsNotExist(err) {
-		fmt.Printf("File %s not found\n", plugin.ConfigFile)
+	if _, err := os.Stat(plugin.ConfigFile); err != nil {
+		if os.IsNotExist(err) {
+			// File doesn't exist - this is OK, just skip the check
+			fmt.Printf("OK: File %s not found, skipping check\n", plugin.ConfigFile)
+			return sensu.CheckStateOK, nil
+		}
+		// Other error (e.g., permission denied) - this is critical
+		fmt.Printf("Error accessing %s: %v\n", plugin.ConfigFile, err)
 		return sensu.CheckStateCritical, nil
 	}
 	return sensu.CheckStateOK, nil
@@ -52,6 +58,12 @@ func checkArgs(event *corev2.Event) (int, error) {
 func executeCheck(event *corev2.Event) (int, error) {
 	file, err := os.Open(plugin.ConfigFile)
 	if err != nil {
+		if os.IsNotExist(err) {
+			// File doesn't exist - this is OK
+			fmt.Printf("OK: File %s not found, skipping check\n", plugin.ConfigFile)
+			return sensu.CheckStateOK, nil
+		}
+		// Other error (e.g., permission denied) - this is critical
 		fmt.Printf("Could not open %s: %v\n", plugin.ConfigFile, err)
 		return sensu.CheckStateCritical, nil
 	}
