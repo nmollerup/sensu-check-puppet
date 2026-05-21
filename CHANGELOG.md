@@ -1,4 +1,12 @@
 
+<a name="0.2.1"></a>
+## [0.2.1](https://github.com/nmollerup/sensu-check-puppet/compare/0.2.0...0.2.1)
+
+> 2026-05-21
+
+### Changed
+- remove armv7 from build targets and Bonsai assets
+
 <a name="0.2.0"></a>
 ## [0.2.0](https://github.com/nmollerup/sensu-check-puppet/compare/0.1.0...0.2.0)
 
