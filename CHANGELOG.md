@@ -1,4 +1,12 @@
 
+<a name="0.2.3"></a>
+## [0.2.3](https://github.com/nmollerup/sensu-check-puppet/compare/0.2.2...0.2.3)
+
+> 2026-05-28
+
+### Changed
+- update Go version to 1.26.3
+
 <a name="0.2.1"></a>
 ## [0.2.1](https://github.com/nmollerup/sensu-check-puppet/compare/0.2.0...0.2.1)
 
