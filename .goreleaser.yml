@@ -6,7 +6,7 @@ builds:
     id: "check-puppet-errors"
     env:
     - CGO_ENABLED=0
-    ldflags: '-s -w -X github.com/sensu-community/sensu-plugin-sdk/version.version={{.Version}} -X github.com/sensu-community/sensu-plugin-sdk/version.commit={{.Commit}} -X github.com/sensu-community/sensu-plugin-sdk/version.date={{.Date}}'
+    ldflags: '-s -w -X github.com/sensu/sensu-plugin-sdk/version.version={{.Version}} -X github.com/sensu/sensu-plugin-sdk/version.commit={{.Commit}} -X github.com/sensu/sensu-plugin-sdk/version.date={{.Date}}'
     # Set the binary output location to bin/ so archive will comply with Sensu Go Asset structure
     binary: bin/check-puppet-errors
     targets:
@@ -20,7 +20,7 @@ builds:
     id: "check-puppet-last-run"
     env:
     - CGO_ENABLED=0
-    ldflags: '-s -w -X github.com/sensu-community/sensu-plugin-sdk/version.version={{.Version}} -X github.com/sensu-community/sensu-plugin-sdk/version.commit={{.Commit}} -X github.com/sensu-community/sensu-plugin-sdk/version.date={{.Date}}'
+    ldflags: '-s -w -X github.com/sensu/sensu-plugin-sdk/version.version={{.Version}} -X github.com/sensu/sensu-plugin-sdk/version.commit={{.Commit}} -X github.com/sensu/sensu-plugin-sdk/version.date={{.Date}}'
     # Set the binary output location to bin/ so archive will comply with Sensu Go Asset structure
     binary: bin/check-puppet-last-run
     targets:
@@ -34,7 +34,7 @@ builds:
     id: "check-puppet-last-run-report"
     env:
     - CGO_ENABLED=0
-    ldflags: '-s -w -X github.com/sensu-community/sensu-plugin-sdk/version.version={{.Version}} -X github.com/sensu-community/sensu-plugin-sdk/version.commit={{.Commit}} -X github.com/sensu-community/sensu-plugin-sdk/version.date={{.Date}}'
+    ldflags: '-s -w -X github.com/sensu/sensu-plugin-sdk/version.version={{.Version}} -X github.com/sensu/sensu-plugin-sdk/version.commit={{.Commit}} -X github.com/sensu/sensu-plugin-sdk/version.date={{.Date}}'
     # Set the binary output location to bin/ so archive will comply with Sensu Go Asset structure
     binary: bin/check-puppet-last-run-report
     targets:
@@ -48,7 +48,7 @@ builds:
     id: "check-puppet-environment"
     env:
     - CGO_ENABLED=0
-    ldflags: '-s -w -X github.com/sensu-community/sensu-plugin-sdk/version.version={{.Version}} -X github.com/sensu-community/sensu-plugin-sdk/version.commit={{.Commit}} -X github.com/sensu-community/sensu-plugin-sdk/version.date={{.Date}}'
+    ldflags: '-s -w -X github.com/sensu/sensu-plugin-sdk/version.version={{.Version}} -X github.com/sensu/sensu-plugin-sdk/version.commit={{.Commit}} -X github.com/sensu/sensu-plugin-sdk/version.date={{.Date}}'
     # Set the binary output location to bin/ so archive will comply with Sensu Go Asset structure
     binary: bin/check-puppet-environment
     targets:
@@ -62,7 +62,7 @@ builds:
     id: "metrics-puppet-run"
     env:
     - CGO_ENABLED=0
-    ldflags: '-s -w -X github.com/sensu-community/sensu-plugin-sdk/version.version={{.Version}} -X github.com/sensu-community/sensu-plugin-sdk/version.commit={{.Commit}} -X github.com/sensu-community/sensu-plugin-sdk/version.date={{.Date}}'
+    ldflags: '-s -w -X github.com/sensu/sensu-plugin-sdk/version.version={{.Version}} -X github.com/sensu/sensu-plugin-sdk/version.commit={{.Commit}} -X github.com/sensu/sensu-plugin-sdk/version.date={{.Date}}'
     # Set the binary output location to bin/ so archive will comply with Sensu Go Asset structure
     binary: bin/metrics-puppet-run
     targets:
